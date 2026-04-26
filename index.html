@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hardik Gupta | Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #fafaf9;
+      --bg-sec: #f3f2ef;
+      --text: #1a1a18;
+      --text-sec: #6b6b68;
+      --text-ter: #a8a8a4;
+      --border: rgba(26,26,24,0.12);
+      --border-sec: rgba(26,26,24,0.22);
+      --accent: #1a1a18;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111110;
+        --bg-sec: #1c1c1a;
+        --text: #f0ede8;
+        --text-sec: #8a8a86;
+        --text-ter: #55554f;
+        --border: rgba(240,237,232,0.10);
+        --border-sec: rgba(240,237,232,0.20);
+        --accent: #f0ede8;
+      }
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      z-index: 100;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 0;
+    }
+
+    .nav-name {
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.75rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      color: var(--text-sec);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+    }
+
+    /* SECTIONS */
+    .section { display: none; padding: 3rem 0 4rem; }
+    .section.active { display: block; }
+
+    .sec-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--text-ter);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    /* HERO */
+    .hero { padding: 3rem 0 3.5rem; }
+    .hero-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--text-sec);
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 40px);
+      font-weight: 300;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 0.85rem;
+    }
+
+    .hero-sub {
+      font-size: 14px;
+      color: var(--text-sec);
+      line-height: 1.65;
+      max-width: 500px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      padding: 9px 20px;
+      border-radius: 100px;
+      cursor: pointer;
+      border: 0.5px solid var(--border-sec);
+      background: transparent;
+      color: var(--text);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s, opacity 0.15s;
+    }
+
+    .btn:hover { background: var(--bg-sec); }
+
+    .btn-filled {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+
+    .btn-filled:hover { opacity: 0.82; background: var(--accent); }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      margin-top: 2rem;
+    }
+
+    .about-text {
+      font-size: 14px;
+      color: var(--text-sec);
+      line-height: 1.8;
+    }
+
+    .tags-wrap { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.25rem; }
+
+    .tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      padding: 4px 11px;
+      border-radius: 100px;
+      border: 0.5px solid var(--border-sec);
+      color: var(--text-sec);
+    }
+
+    /* PROJECTS */
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 0;
+    }
+
+    .proj-card {
+      border: 0.5px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      transition: border-color 0.15s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .proj-card:hover { border-color: var(--border-sec); }
+
+    .proj-title { font-size: 14px; font-weight: 500; margin-bottom: 6px; }
+    .proj-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--text-ter);
+      margin-bottom: 8px;
+    }
+
+    .proj-desc {
+      font-size: 13px;
+      color: var(--text-sec);
+      line-height: 1.65;
+      margin-bottom: 14px;
+      flex: 1;
+    }
+
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+    .proj-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: var(--bg-sec);
+      color: var(--text-sec);
+    }
+
+    /* RESUME */
+    .resume-block { margin-bottom: 2.75rem; }
+
+    .resume-entry {
+      padding: 1.25rem 0;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .resume-entry:last-child { border-bottom: none; }
+
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 4px;
+    }
+
+    .entry-title { font-size: 14px; font-weight: 500; }
+
+    .entry-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--text-ter);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .entry-org {
+      font-size: 13px;
+      color: var(--text-sec);
+      margin-bottom: 8px;
+    }
+
+    .entry-detail {
+      font-size: 13px;
+      color: var(--text-sec);
+      line-height: 1.7;
+    }
+
+    .entry-bullets { list-style: none; padding: 0; }
+
+    .entry-bullets li {
+      font-size: 13px;
+      color: var(--text-sec);
+      line-height: 1.75;
+      padding-left: 1.1rem;
+      position: relative;
+      margin-bottom: 3px;
+    }
+
+    .entry-bullets li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--text-ter);
+    }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .skill-group {
+      padding: 1rem;
+      border: 0.5px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .skill-group-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--text-ter);
+      margin-bottom: 10px;
+    }
+
+    .skill-items { display: flex; flex-wrap: wrap; gap: 6px; }
+
+    /* CONTACT */
+    .contact-section { padding: 1rem 0 2rem; }
+
+    .contact-intro {
+      font-size: 14px;
+      color: var(--text-sec);
+      line-height: 1.8;
+      margin-bottom: 1.75rem;
+      max-width: 460px;
+    }
+
+    .contact-links { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    .contact-link {
+      font-size: 13px;
+      padding: 9px 18px;
+      border: 0.5px solid var(--border-sec);
+      border-radius: 100px;
+      color: var(--text-sec);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    .contact-link:hover { border-color: var(--accent); color: var(--text); }
+
+    /* FOOTER */
+    footer {
+      border-top: 0.5px solid var(--border);
+      padding: 1.5rem 0;
+      text-align: center;
+    }
+
+    footer p {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--text-ter);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 560px) {
+      .about-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .project-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links { gap: 1rem; }
+    }
+
+    /* FADE IN */
+    .section.active {
+      animation: fadeIn 0.25s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <div class="nav-inner">
+        <a class="nav-name" onclick="show('about')" href="#">Hardik Gupta</a>
+        <ul class="nav-links">
+          <li><a href="#" onclick="show('about')" id="nav-about" class="active">About</a></li>
+          <li><a href="#" onclick="show('projects')" id="nav-projects">Projects</a></li>
+          <li><a href="#" onclick="show('resume')" id="nav-resume">Resume</a></li>
+          <li><a href="#" onclick="show('contact')" id="nav-contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <!-- ABOUT -->
+    <div id="about" class="section active">
+      <div class="hero">
+        <div class="hero-tag">// portfolio</div>
+        <h1>Hardik Gupta</h1>
+        <p class="hero-sub">ECE · Audio-Visual ML · Automatic Foley Generation · Federated Learning</p>
+        <div class="hero-actions">
+          <a class="btn btn-filled" href="#" onclick="show('projects')">View Projects</a>
+          <a class="btn" href="#" onclick="show('resume')">Resume</a>
+        </div>
+      </div>
+
+      <div class="sec-label">About me</div>
+      <div class="about-grid">
+        <p class="about-text">I'm an Electronics & Communication Engineering undergraduate at PES University, Bengaluru, working toward becoming an AI engineer. I'm drawn to projects that go beyond benchmarks — ones that engage with real problems, real constraints, and real impact. Whether it's teaching a model to hear a silent video or building privacy-preserving systems for medical imaging, I care most about work that means something outside the lab.</p>
+        <div>
+          <div class="tags-wrap">
+            <span class="tag">Audio-Visual ML</span>
+            <span class="tag">Sound Synthesis</span>
+            <span class="tag">Federated Learning</span>
+            <span class="tag">Computer Vision</span>
+            <span class="tag">Deep Learning</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div id="projects" class="section">
+      <div class="sec-label">Projects</div>
+      <div class="project-grid">
+
+        <div class="proj-card">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+            <div class="proj-title" style="margin-bottom:0;">Audio in Silent Video</div>
+            <a href="https://github.com/hg-8/Audio-in-silent-videos" target="_blank" rel="noopener" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-ter);text-decoration:none;transition:color 0.15s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-ter)'">GitHub ↗</a>
+          </div>
+          <div class="proj-date">Feb 2026 – Present</div>
+          <p class="proj-desc">Audio-visual contrastive learning model using ResNet-18 and a custom spectrogram encoder on a curated 600-video VGGSound dataset. Achieved 0.75 retrieval accuracy and 0.3889 training loss, successfully aligning cross-modal representations.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">PyTorch</span>
+            <span class="proj-tag">ResNet-18</span>
+            <span class="proj-tag">VGGSound</span>
+            <span class="proj-tag">Contrastive Learning</span>
+          </div>
+        </div>
+
+        <div class="proj-card">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+            <div class="proj-title" style="margin-bottom:0;">Federated AI — Alzheimer's Detection</div>
+            <a href="https://github.com/Vaibhav2824/privacy-federated-alzheimer-detection" target="_blank" rel="noopener" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-ter);text-decoration:none;flex-shrink:0;margin-left:8px;transition:color 0.15s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-ter)'">GitHub ↗</a>
+          </div>
+          <div class="proj-date">Aug 2025 – Present</div>
+          <p class="proj-desc">Secure federated learning pipeline for Alzheimer's MRI classification using VGG19/ResNet50, enabling decentralized model training. Integrated Grad-CAM and SHAP for interpretability and visual heatmaps.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">Federated Learning</span>
+            <span class="proj-tag">VGG19</span>
+            <span class="proj-tag">Grad-CAM</span>
+            <span class="proj-tag">SHAP</span>
+          </div>
+        </div>
+
+        <div class="proj-card">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+            <div class="proj-title" style="margin-bottom:0;">Industrial Defect Detection</div>
+            <a href="https://github.com/hg-8/Defect-detection-in-industrial-images" target="_blank" rel="noopener" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-ter);text-decoration:none;flex-shrink:0;margin-left:8px;transition:color 0.15s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-ter)'">GitHub ↗</a>
+          </div>
+          <div class="proj-date">Nov 2025</div>
+          <p class="proj-desc">Automated textile defect detection pipeline using OpenCV, local variance analysis, and morphological filtering to isolate anomalies like holes and stains.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">OpenCV</span>
+            <span class="proj-tag">Morphological Filtering</span>
+            <span class="proj-tag">Python</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RESUME -->
+    <div id="resume" class="section">
+
+      <div class="resume-block">
+        <div class="sec-label">Education</div>
+        <div class="resume-entry">
+          <div class="entry-header">
+            <div class="entry-title">B.Tech — Electronics &amp; Communication Engineering</div>
+            <div class="entry-date">Aug 2023 – Present</div>
+          </div>
+          <div class="entry-org">PES University, Bengaluru</div>
+        </div>
+        <div class="resume-entry">
+          <div class="entry-header">
+            <div class="entry-title">Class 12 — CBSE</div>
+            <div class="entry-date">2022 – 2023</div>
+          </div>
+          <div class="entry-org">Lotus Valley International School, Noida</div>
+          <div class="entry-detail">Percentage: 86%</div>
+        </div>
+        <div class="resume-entry">
+          <div class="entry-header">
+            <div class="entry-title">Class 10 — CBSE</div>
+            <div class="entry-date">2020 – 2021</div>
+          </div>
+          <div class="entry-org">Lotus Valley International School, Noida</div>
+          <div class="entry-detail">Percentage: 93%</div>
+        </div>
+      </div>
+
+      <div class="resume-block">
+        <div class="sec-label">Experience</div>
+        <div class="resume-entry">
+          <div class="entry-header">
+            <div class="entry-title">Winter Intern</div>
+            <div class="entry-date">Dec 2025 – Jan 2026</div>
+          </div>
+          <div class="entry-org">Bharat Space Education Research Centre, New Delhi</div>
+          <ul class="entry-bullets">
+            <li>Modelled aircraft stability and performance using MATLAB (AID toolbox) and XFLR5, identifying key design parameters for optimal flight behavior.</li>
+          </ul>
+        </div>
+        <div class="resume-entry">
+          <div class="entry-header">
+            <div class="entry-title">Summer Intern</div>
+            <div class="entry-date">Jul 2025 – Aug 2025</div>
+          </div>
+          <div class="entry-org">ColorHome Lighting, Noida</div>
+          <ul class="entry-bullets">
+            <li>Analyzed the end-to-end manufacturing lifecycle of 9W LED bulbs, from component sourcing to final dispatch.</li>
+            <li>Gained hands-on experience in SMT operations, quality assurance, and electrical safety testing.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="resume-block">
+        <div class="sec-label">Certifications</div>
+        <div class="resume-entry">
+          <div class="entry-header">
+            <div class="entry-title">AI &amp; ML with Drone Technology</div>
+          </div>
+          <div class="entry-org">IIT Hyderabad (TiHAN)</div>
+          <ul class="entry-bullets" style="margin-top: 8px;">
+            <li>Hands-on training in ML, deep learning, and AI deployment with academic exposure from IIT Hyderabad.</li>
+            <li>Built and evaluated regression, classification, clustering, and neural network models using Python.</li>
+            <li>Practical understanding of drone architecture including core components and working principles.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="resume-block">
+        <div class="sec-label">Skills</div>
+        <div class="skills-grid">
+          <div class="skill-group">
+            <div class="skill-group-label">Languages</div>
+            <div class="skill-items">
+              <span class="tag">Python</span>
+              <span class="tag">C</span>
+              <span class="tag">Assembly</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-label">ML / Data</div>
+            <div class="skill-items">
+              <span class="tag">PyTorch</span>
+              <span class="tag">TensorFlow</span>
+              <span class="tag">Scikit-learn</span>
+              <span class="tag">NumPy</span>
+              <span class="tag">Pandas</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-label">Visualization</div>
+            <div class="skill-items">
+              <span class="tag">Matplotlib</span>
+              <span class="tag">Seaborn</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-label">Tools</div>
+            <div class="skill-items">
+              <span class="tag">Git</span>
+              <span class="tag">MATLAB</span>
+              <span class="tag">Jupyter</span>
+              <span class="tag">VS Code</span>
+              <span class="tag">LaTeX</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-label">Platforms</div>
+            <div class="skill-items">
+              <span class="tag">Google Colab</span>
+              <span class="tag">Arduino IDE</span>
+              <span class="tag">Ripes</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CONTACT -->
+    <div id="contact" class="section">
+      <div class="sec-label">Contact</div>
+      <div class="contact-section">
+        <p class="contact-intro">Open to research collaborations, internships, and interesting conversations around audio-visual ML and beyond. Feel free to reach out.</p>
+        <div class="contact-links">
+          <a class="contact-link" href="https://github.com/hg-8" target="_blank" rel="noopener">GitHub</a>
+          <a class="contact-link" href="https://www.linkedin.com/in/hardik-gupta" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="contact-link" href="mailto:hg08072005@gmail.com">Email</a>
+          <a class="contact-link" href="tel:+919717417305">+91 97174 17305</a>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /container -->
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Hardik Gupta</p>
+    </div>
+  </footer>
+
+  <script>
+    function show(id) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+      const navEl = document.getElementById('nav-' + id);
+      if (navEl) navEl.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return false;
+    }
+  </script>
+
+</body>
+</html>
