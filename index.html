@@ -40,7 +40,6 @@
       font-family: 'DM Sans', sans-serif;
       background: var(--bg);
       color: var(--text);
-      min-height: 100vh;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -88,13 +87,15 @@
     }
 
     .nav-links a:hover,
-    .nav-links a.active {
-      color: var(--text);
-    }
+    .nav-links a.active { color: var(--text); }
 
     /* SECTIONS */
-    .section { display: none; padding: 3rem 0 4rem; }
-    .section.active { display: block; }
+    section {
+      padding: 4rem 0;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    section:last-of-type { border-bottom: none; }
 
     .sec-label {
       font-family: 'DM Mono', monospace;
@@ -108,7 +109,8 @@
     }
 
     /* HERO */
-    .hero { padding: 3rem 0 3.5rem; }
+    .hero { padding: 3.5rem 0 2.5rem; }
+
     .hero-tag {
       font-family: 'DM Mono', monospace;
       font-size: 12px;
@@ -192,7 +194,6 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
-      margin-top: 0;
     }
 
     .proj-card {
@@ -206,7 +207,6 @@
 
     .proj-card:hover { border-color: var(--border-sec); }
 
-    .proj-title { font-size: 14px; font-weight: 500; margin-bottom: 6px; }
     .proj-date {
       font-family: 'DM Mono', monospace;
       font-size: 11px;
@@ -235,6 +235,7 @@
 
     /* RESUME */
     .resume-block { margin-bottom: 2.75rem; }
+    .resume-block:last-child { margin-bottom: 0; }
 
     .resume-entry {
       padding: 1.25rem 0;
@@ -314,8 +315,6 @@
     .skill-items { display: flex; flex-wrap: wrap; gap: 6px; }
 
     /* CONTACT */
-    .contact-section { padding: 1rem 0 2rem; }
-
     .contact-intro {
       font-size: 14px;
       color: var(--text-sec);
@@ -333,9 +332,6 @@
       border-radius: 100px;
       color: var(--text-sec);
       text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
       transition: border-color 0.15s, color 0.15s;
     }
 
@@ -361,16 +357,6 @@
       .skills-grid { grid-template-columns: 1fr 1fr; }
       .nav-links { gap: 1rem; }
     }
-
-    /* FADE IN */
-    .section.active {
-      animation: fadeIn 0.25s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
   </style>
 </head>
 <body>
@@ -378,12 +364,12 @@
   <nav>
     <div class="container">
       <div class="nav-inner">
-        <a class="nav-name" onclick="show('about')" href="#">Hardik Gupta</a>
+        <a class="nav-name" href="#about">Hardik Gupta</a>
         <ul class="nav-links">
-          <li><a href="#" onclick="show('about')" id="nav-about" class="active">About</a></li>
-          <li><a href="#" onclick="show('projects')" id="nav-projects">Projects</a></li>
-          <li><a href="#" onclick="show('resume')" id="nav-resume">Resume</a></li>
-          <li><a href="#" onclick="show('contact')" id="nav-contact">Contact</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#resume">Resume</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
     </div>
@@ -392,14 +378,14 @@
   <div class="container">
 
     <!-- ABOUT -->
-    <div id="about" class="section active">
+    <section id="about">
       <div class="hero">
         <div class="hero-tag">// portfolio</div>
         <h1>Hardik Gupta</h1>
         <p class="hero-sub">ECE · Audio-Visual ML · Automatic Foley Generation · Federated Learning</p>
         <div class="hero-actions">
-          <a class="btn btn-filled" href="#" onclick="show('projects')">View Projects</a>
-          <a class="btn" href="#" onclick="show('resume')">Resume</a>
+          <a class="btn btn-filled" href="#projects">View Projects</a>
+          <a class="btn" href="#resume">Resume</a>
         </div>
       </div>
 
@@ -416,20 +402,20 @@
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- PROJECTS -->
-    <div id="projects" class="section">
+    <section id="projects">
       <div class="sec-label">Projects</div>
       <div class="project-grid">
 
         <div class="proj-card">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
-            <div class="proj-title" style="margin-bottom:0;">Audio in Silent Video</div>
-            <a href="https://github.com/hg-8/Audio-in-silent-videos" target="_blank" rel="noopener" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-ter);text-decoration:none;transition:color 0.15s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-ter)'">GitHub ↗</a>
+            <div style="font-size:14px;font-weight:500;">Audio in Silent Video</div>
+            <a href="https://github.com/hg-8/Audio-in-silent-videos" target="_blank" rel="noopener" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-ter);text-decoration:none;transition:color 0.15s;flex-shrink:0;margin-left:8px;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-ter)'">GitHub ↗</a>
           </div>
           <div class="proj-date">Feb 2026 – Present</div>
-          <p class="proj-desc">Audio-visual contrastive learning model using ResNet-18 and a custom spectrogram encoder on a curated 600-video VGGSound dataset. Achieved 0.75 retrieval accuracy and 0.3889 training loss, successfully aligning cross-modal representations.</p>
+          <p class="proj-desc">Audio-visual contrastive learning model using ResNet-18 and a custom spectrogram encoder on a curated 600-video VGGSound dataset. Achieved 0.75 retrieval accuracy and 0.3889 training loss.</p>
           <div class="proj-tags">
             <span class="proj-tag">PyTorch</span>
             <span class="proj-tag">ResNet-18</span>
@@ -440,11 +426,11 @@
 
         <div class="proj-card">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
-            <div class="proj-title" style="margin-bottom:0;">Federated AI — Alzheimer's Detection</div>
-            <a href="https://github.com/Vaibhav2824/privacy-federated-alzheimer-detection" target="_blank" rel="noopener" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-ter);text-decoration:none;flex-shrink:0;margin-left:8px;transition:color 0.15s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-ter)'">GitHub ↗</a>
+            <div style="font-size:14px;font-weight:500;">Federated AI — Alzheimer's Detection</div>
+            <a href="https://github.com/Vaibhav2824/privacy-federated-alzheimer-detection" target="_blank" rel="noopener" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-ter);text-decoration:none;transition:color 0.15s;flex-shrink:0;margin-left:8px;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-ter)'">GitHub ↗</a>
           </div>
           <div class="proj-date">Aug 2025 – Present</div>
-          <p class="proj-desc">Secure federated learning pipeline for Alzheimer's MRI classification using VGG19/ResNet50, enabling decentralized model training. Integrated Grad-CAM and SHAP for interpretability and visual heatmaps.</p>
+          <p class="proj-desc">Secure federated learning pipeline for Alzheimer's MRI classification using VGG19/ResNet50. Integrated Grad-CAM and SHAP for interpretability and visual heatmaps.</p>
           <div class="proj-tags">
             <span class="proj-tag">Federated Learning</span>
             <span class="proj-tag">VGG19</span>
@@ -455,8 +441,8 @@
 
         <div class="proj-card">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
-            <div class="proj-title" style="margin-bottom:0;">Industrial Defect Detection</div>
-            <a href="https://github.com/hg-8/Defect-detection-in-industrial-images" target="_blank" rel="noopener" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-ter);text-decoration:none;flex-shrink:0;margin-left:8px;transition:color 0.15s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-ter)'">GitHub ↗</a>
+            <div style="font-size:14px;font-weight:500;">Industrial Defect Detection</div>
+            <a href="https://github.com/hg-8/Defect-detection-in-industrial-images" target="_blank" rel="noopener" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-ter);text-decoration:none;transition:color 0.15s;flex-shrink:0;margin-left:8px;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-ter)'">GitHub ↗</a>
           </div>
           <div class="proj-date">Nov 2025</div>
           <p class="proj-desc">Automated textile defect detection pipeline using OpenCV, local variance analysis, and morphological filtering to isolate anomalies like holes and stains.</p>
@@ -468,10 +454,10 @@
         </div>
 
       </div>
-    </div>
+    </section>
 
     <!-- RESUME -->
-    <div id="resume" class="section">
+    <section id="resume">
 
       <div class="resume-block">
         <div class="sec-label">Education</div>
@@ -532,7 +518,7 @@
             <div class="entry-title">AI &amp; ML with Drone Technology</div>
           </div>
           <div class="entry-org">IIT Hyderabad (TiHAN)</div>
-          <ul class="entry-bullets" style="margin-top: 8px;">
+          <ul class="entry-bullets" style="margin-top:8px;">
             <li>Hands-on training in ML, deep learning, and AI deployment with academic exposure from IIT Hyderabad.</li>
             <li>Built and evaluated regression, classification, clustering, and neural network models using Python.</li>
             <li>Practical understanding of drone architecture including core components and working principles.</li>
@@ -589,23 +575,21 @@
         </div>
       </div>
 
-    </div>
+    </section>
 
     <!-- CONTACT -->
-    <div id="contact" class="section">
+    <section id="contact">
       <div class="sec-label">Contact</div>
-      <div class="contact-section">
-        <p class="contact-intro">Open to research collaborations, internships, and interesting conversations around audio-visual ML and beyond. Feel free to reach out.</p>
-        <div class="contact-links">
-          <a class="contact-link" href="https://github.com/hg-8" target="_blank" rel="noopener">GitHub</a>
-          <a class="contact-link" href="https://www.linkedin.com/in/hardik-gupta" target="_blank" rel="noopener">LinkedIn</a>
-          <a class="contact-link" href="mailto:hg08072005@gmail.com">Email</a>
-          <a class="contact-link" href="tel:+919717417305">+91 97174 17305</a>
-        </div>
+      <p class="contact-intro">Open to research collaborations, internships, and interesting conversations around audio-visual ML and beyond. Feel free to reach out.</p>
+      <div class="contact-links">
+        <a class="contact-link" href="https://github.com/hg-8" target="_blank" rel="noopener">GitHub</a>
+        <a class="contact-link" href="https://www.linkedin.com/in/hardik-gupta" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="contact-link" href="mailto:hg08072005@gmail.com">Email</a>
+        <a class="contact-link" href="tel:+919717417305">+91 97174 17305</a>
       </div>
-    </div>
+    </section>
 
-  </div><!-- /container -->
+  </div>
 
   <footer>
     <div class="container">
@@ -614,15 +598,20 @@
   </footer>
 
   <script>
-    function show(id) {
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-      const navEl = document.getElementById('nav-' + id);
-      if (navEl) navEl.classList.add('active');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return false;
-    }
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(a => a.classList.remove('active'));
+          const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+
+    sections.forEach(s => observer.observe(s));
   </script>
 
 </body>
