@@ -19,7 +19,8 @@
       padding: 0;
     }
 
-    :root {
+    :root,
+    [data-theme="light"] {
       --bg: #fafaf9;
       --bg-sec: #f3f2ef;
       --text: #1a1a18;
@@ -30,8 +31,19 @@
       --accent: #1a1a18;
     }
 
+    [data-theme="dark"] {
+      --bg: #111110;
+      --bg-sec: #1c1c1a;
+      --text: #f0ede8;
+      --text-sec: #8a8a86;
+      --text-ter: #55554f;
+      --border: rgba(240, 237, 232, 0.10);
+      --border-sec: rgba(240, 237, 232, 0.20);
+      --accent: #f0ede8;
+    }
+
     @media (prefers-color-scheme: dark) {
-      :root {
+      :root:not([data-theme="light"]) {
         --bg: #111110;
         --bg-sec: #1c1c1a;
         --text: #f0ede8;
@@ -67,13 +79,20 @@
       background: var(--bg);
       z-index: 100;
       border-bottom: 0.5px solid var(--border);
+      width: 100%;
+    }
+
+    .nav-container {
+      max-width: 100%;
+      padding: 0 2rem;
     }
 
     .nav-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.1rem 0;
+      padding: 0.9rem 0;
+      gap: 1rem;
     }
 
     .nav-name {
@@ -82,12 +101,21 @@
       letter-spacing: -0.01em;
       text-decoration: none;
       color: var(--text);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
     }
 
     .nav-links {
       display: flex;
-      gap: 1.75rem;
+      gap: 1.15rem;
       list-style: none;
+      align-items: center;
     }
 
     .nav-links a {
@@ -95,11 +123,34 @@
       color: var(--text-sec);
       text-decoration: none;
       transition: color 0.15s;
+      white-space: nowrap;
     }
 
     .nav-links a:hover,
     .nav-links a.active {
       color: var(--text);
+    }
+
+    /* THEME TOGGLE */
+    .theme-toggle-btn {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      padding: 5px 12px;
+      border-radius: 100px;
+      border: 0.5px solid var(--border-sec);
+      background: transparent;
+      color: var(--text-sec);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+
+    .theme-toggle-btn:hover {
+      background: var(--bg-sec);
+      color: var(--text);
+      border-color: var(--accent);
     }
 
     /* SECTIONS */
@@ -456,11 +507,149 @@
       color: var(--text-ter);
     }
 
+    /* ROLES & RESUMES */
+    .role-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 1.5rem;
+    }
+
+    .role-tab {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      border: 0.5px solid var(--border-sec);
+      background: transparent;
+      color: var(--text-sec);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .role-tab:hover,
+    .role-tab.active {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+
+    .role-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .role-card {
+      border: 0.5px solid var(--border);
+      border-radius: 12px;
+      padding: 1.35rem;
+      background: var(--bg);
+      transition: border-color 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .role-card:hover {
+      border-color: var(--border-sec);
+    }
+
+    .role-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .role-badge {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      padding: 3px 9px;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-tech {
+      background: rgba(37, 99, 235, 0.12);
+      color: #2563eb;
+      border: 0.5px solid rgba(37, 99, 235, 0.3);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .badge-tech {
+        background: rgba(96, 165, 250, 0.15);
+        color: #60a5fa;
+        border-color: rgba(96, 165, 250, 0.3);
+      }
+    }
+
+    .badge-nontech {
+      background: rgba(16, 185, 129, 0.12);
+      color: #059669;
+      border: 0.5px solid rgba(16, 185, 129, 0.3);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .badge-nontech {
+        background: rgba(52, 211, 153, 0.15);
+        color: #34d399;
+        border-color: rgba(52, 211, 153, 0.3);
+      }
+    }
+
+    .role-title {
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+
+    .role-subtitle {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--text-ter);
+      margin-bottom: 10px;
+    }
+
+    .role-desc {
+      font-size: 13px;
+      color: var(--text-sec);
+      line-height: 1.65;
+      margin-bottom: 14px;
+      flex: 1;
+    }
+
+    .role-competencies {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 1.25rem;
+    }
+
+    .role-card-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: auto;
+      padding-top: 10px;
+      border-top: 0.5px solid var(--border);
+    }
+
+    .btn-sm {
+      font-size: 12px;
+      padding: 6px 14px;
+    }
+
     /* RESPONSIVE */
     @media (max-width: 560px) {
       .about-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
+      }
+
+      .role-grid {
+        grid-template-columns: 1fr;
       }
 
       .project-grid {
@@ -481,17 +670,24 @@
 <body>
 
   <nav>
-    <div class="container">
+    <div class="nav-container">
       <div class="nav-inner">
         <a class="nav-name" href="#about">Hardik Gupta</a>
-        <ul class="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#education">Education</a></li>
-          <li><a href="#certification">Certification</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
+        <div class="nav-right">
+          <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#roles">Roles &amp; Resumes</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#certification">Certification</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+          <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            <span>Theme</span>
+          </button>
+        </div>
       </div>
     </div>
   </nav>
@@ -503,26 +699,88 @@
       <div class="hero">
         <div class="hero-tag">B.Tech | ECE Undergraduate</div>
         <h1>Hardik Gupta</h1>
-        <p class="hero-sub">Electronic &amp; Communication Engineering · Native Android · Computer Vision &amp; ML · Audio-Visual Perception</p>
+        <p class="hero-sub">Electronic &amp; Communication Engineering · Software, AI/ML &amp; Product/Operations</p>
         <div class="hero-actions">
           <a class="btn btn-filled" href="#projects">View Projects</a>
-          <a class="btn" href="resume_hardik_gupta.pdf" download>Resume ↓</a>
+          <a class="btn" href="resume_hardik_gupta_general_technical.pdf" download>Tech Resume ↓</a>
+          <a class="btn" href="resume_hardik_gupta_non_tech.pdf" download>Non-Tech Resume ↓</a>
         </div>
       </div>
 
       <div class="sec-label">About me</div>
       <div class="about-grid">
-        <p class="about-text">I am an ECE undergraduate passionate about AI/ML, computer vision, and native mobile development. I focus on building practical, high-performance applications — ranging from offline-first native Android apps to federated learning pipelines and automated defect detection systems.</p>
+        <p class="about-text">I am an ECE undergraduate with dual strengths across technical software engineering (AI/ML, computer vision, native Android) and non-technical operational domains (hardware component lifecycles, product change analysis, ECN/MCN workflows, and technical project management).</p>
         <div>
           <div class="tags-wrap">
             <span class="tag">Native Android</span>
             <span class="tag">Kotlin &amp; Jetpack Compose</span>
             <span class="tag">Computer Vision</span>
             <span class="tag">Deep Learning</span>
-            <span class="tag">Federated Learning</span>
-            <span class="tag">Audio-Visual ML</span>
+            <span class="tag">Product Change Analyst</span>
+            <span class="tag">Project Management</span>
+            <span class="tag">ECN / MCN / BOM</span>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ROLES & RESUMES -->
+    <section id="roles">
+      <div class="sec-label">Target Job Roles &amp; Resumes</div>
+      <div class="role-tabs">
+        <button class="role-tab active" onclick="filterRoles('all', event)">All Roles</button>
+        <button class="role-tab" onclick="filterRoles('tech', event)">Tech Roles</button>
+        <button class="role-tab" onclick="filterRoles('nontech', event)">Non-Tech Roles</button>
+      </div>
+
+      <div class="role-grid">
+
+        <!-- TECH ROLE CARD -->
+        <div class="role-card" data-role="tech">
+          <div class="role-card-header">
+            <span class="role-badge badge-tech">Tech Role</span>
+            <span class="proj-date">SDE &amp; AI/ML Track</span>
+          </div>
+          <h3 class="role-title">Software Engineering, AI/ML &amp; Native Mobile</h3>
+          <div class="role-subtitle">Full-Stack Mobile · Computer Vision · Federated AI</div>
+          <p class="role-desc">Focuses on building production-grade native Android applications in Kotlin &amp; Jetpack Compose with on-device AI integration, state-of-the-art YOLOv8 defect detection pipelines, and privacy-preserving federated deep learning models.</p>
+          <div class="role-competencies">
+            <span class="proj-tag">Kotlin &amp; Compose</span>
+            <span class="proj-tag">Room DB &amp; Firebase</span>
+            <span class="proj-tag">PyTorch &amp; OpenCV</span>
+            <span class="proj-tag">YOLOv5 / YOLOv8</span>
+            <span class="proj-tag">Federated AI</span>
+            <span class="proj-tag">R8/ProGuard Opt</span>
+          </div>
+          <div class="role-card-actions">
+            <a class="btn btn-filled btn-sm" href="resume_hardik_gupta_general_technical.pdf" download>Download Tech Resume ↓</a>
+            <a class="btn btn-sm" href="resume_hardik_gupta_general_technical.pdf" target="_blank" rel="noopener">Preview ↗</a>
+          </div>
+        </div>
+
+        <!-- NON-TECH ROLE CARD -->
+        <div class="role-card" data-role="nontech">
+          <div class="role-card-header">
+            <span class="role-badge badge-nontech">Non-Tech Role</span>
+            <span class="proj-date">Operations &amp; PM Track</span>
+          </div>
+          <h3 class="role-title">Product Change Analyst &amp; Project Management</h3>
+          <div class="role-subtitle">ECN/MCN Workflows · Config/Order BOM · Stage-Gate PM</div>
+          <p class="role-desc">Combined blanket non-tech resume tailored for Product Change Analysis, Product Lifecycle Management (PLM), Continuous Improvement (Six Sigma/CIP), Config/Order BOM audits, E&amp;O inventory mitigation, and cross-functional project execution across R&amp;D, Sourcing, and Ops.</p>
+          <div class="role-competencies">
+            <span class="proj-tag">ECN / MCN / PCN</span>
+            <span class="proj-tag">Config &amp; Order BOM</span>
+            <span class="proj-tag">Stage-Gate PM</span>
+            <span class="proj-tag">Process of Record (POR)</span>
+            <span class="proj-tag">E&amp;O Inventory</span>
+            <span class="proj-tag">Power BI &amp; Excel</span>
+          </div>
+          <div class="role-card-actions">
+            <a class="btn btn-filled btn-sm" href="resume_hardik_gupta_non_tech.pdf" download>Download Non-Tech Resume ↓</a>
+            <a class="btn btn-sm" href="resume_hardik_gupta_non_tech.pdf" target="_blank" rel="noopener">Preview ↗</a>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -776,6 +1034,59 @@
     }, { rootMargin: '-40% 0px -55% 0px' });
 
     sections.forEach(s => observer.observe(s));
+
+    function filterRoles(category, evt) {
+      const tabs = document.querySelectorAll('.role-tab');
+      const cards = document.querySelectorAll('.role-card');
+
+      tabs.forEach(tab => tab.classList.remove('active'));
+      if (evt && evt.target) {
+        evt.target.classList.add('active');
+      }
+
+      cards.forEach(card => {
+        if (category === 'all' || card.dataset.role === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Theme Switcher Logic
+    const themeToggleBtn = document.getElementById('theme-toggle');
+
+    function getPreferredTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) return savedTheme;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      updateToggleUI(theme);
+    }
+
+    function updateToggleUI(theme) {
+      if (!themeToggleBtn) return;
+      if (theme === 'dark') {
+        themeToggleBtn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg><span>Light</span>';
+      } else {
+        themeToggleBtn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><span>Dark</span>';
+      }
+    }
+
+    const initialTheme = getPreferredTheme();
+    applyTheme(initialTheme);
+
+    if (themeToggleBtn) {
+      themeToggleBtn.addEventListener('click', () => {
+        const activeTheme = document.documentElement.getAttribute('data-theme') || initialTheme;
+        const nextTheme = activeTheme === 'dark' ? 'light' : 'dark';
+        applyTheme(nextTheme);
+      });
+    }
   </script>
 
 </body>
