@@ -627,6 +627,37 @@
       margin-bottom: 1.25rem;
     }
 
+    .role-section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      color: var(--text-ter);
+      text-transform: uppercase;
+      margin: 14px 0 6px;
+    }
+
+    .role-bullets {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 14px;
+    }
+
+    .role-bullets li {
+      font-size: 12.5px;
+      color: var(--text-sec);
+      line-height: 1.65;
+      padding-left: 1.1rem;
+      position: relative;
+      margin-bottom: 6px;
+    }
+
+    .role-bullets li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--text-ter);
+    }
+
     .role-card-actions {
       display: flex;
       gap: 8px;
@@ -742,15 +773,28 @@
             <span class="proj-date">SDE &amp; AI/ML Track</span>
           </div>
           <h3 class="role-title">Software Engineering, AI/ML &amp; Native Mobile</h3>
-          <div class="role-subtitle">Full-Stack Mobile · Computer Vision · Federated AI</div>
-          <p class="role-desc">Focuses on building production-grade native Android applications in Kotlin &amp; Jetpack Compose with on-device AI integration, state-of-the-art YOLOv8 defect detection pipelines, and privacy-preserving federated deep learning models.</p>
+          <div class="role-subtitle">Native Android · Computer Vision · Applied ML</div>
+          
+          <div class="role-section-label">Summary</div>
+          <p class="role-desc">ECE undergraduate building native Android applications, computer vision models, and applied ML pipelines. Experienced in offline-first mobile apps with AI integration, automated PCB defect detection, and federated learning.</p>
+          
+          <div class="role-section-label">Highlights &amp; Key Work</div>
+          <ul class="role-bullets">
+            <li><strong>Vocab Ledger (Play Store):</strong> Built offline-first native Android app (Kotlin, Compose) with Gemini AI integration; reduced app size by <strong>44%</strong> via custom ProGuard rules.</li>
+            <li><strong>Automated PCB Defect Inspection:</strong> Trained YOLOv5s/v8s on 693 PCB images classifying 6 defect types (<strong>97.4% mAP@0.5</strong>) with automated severity scoring.</li>
+            <li><strong>Federated Healthcare AI:</strong> Implemented a federated learning pipeline on brain MRI (VGG19/ResNet50) with Grad-CAM and SHAP for explainable AI.</li>
+            <li><strong>BSERC Systems Engineering Intern:</strong> Modeled flight dynamics and aircraft stability using MATLAB and XFLR5.</li>
+          </ul>
+
+          <div class="role-section-label">Core Skills</div>
           <div class="role-competencies">
             <span class="proj-tag">Kotlin &amp; Compose</span>
-            <span class="proj-tag">Room DB &amp; Firebase</span>
             <span class="proj-tag">PyTorch &amp; OpenCV</span>
             <span class="proj-tag">YOLOv5 / YOLOv8</span>
+            <span class="proj-tag">Room DB &amp; Firebase</span>
             <span class="proj-tag">Federated AI</span>
-            <span class="proj-tag">R8/ProGuard Opt</span>
+            <span class="proj-tag">ProGuard Opt</span>
+            <span class="proj-tag">MATLAB &amp; C</span>
           </div>
           <div class="role-card-actions">
             <a class="btn btn-filled btn-sm" href="resume_hardik_gupta_general_technical.pdf" download>Download Tech Resume ↓</a>
@@ -766,7 +810,19 @@
           </div>
           <h3 class="role-title">Product Change Analyst &amp; Project Management</h3>
           <div class="role-subtitle">ECN/MCN Workflows · Config/Order BOM · Stage-Gate PM</div>
-          <p class="role-desc">Combined blanket non-tech resume tailored for Product Change Analysis, Product Lifecycle Management (PLM), Continuous Improvement (Six Sigma/CIP), Config/Order BOM audits, E&amp;O inventory mitigation, and cross-functional project execution across R&amp;D, Sourcing, and Ops.</p>
+          
+          <div class="role-section-label">Summary</div>
+          <p class="role-desc">ECE undergraduate with hands-on experience in electronics manufacturing, hardware component lifecycles, and technical project management. Skilled in ECN/MCN workflows, Config/Order BOM verification, Stage-Gate milestone tracking, and E&amp;O inventory mitigation.</p>
+          
+          <div class="role-section-label">Highlights &amp; Key Work</div>
+          <ul class="role-bullets">
+            <li><strong>ColorHome Lighting (Operations Intern):</strong> Audited 9W LED bulb manufacturing, managed ECN/MCN workflows, verified BOM structures, and assessed inventory to minimize E&amp;O stock. (<a href="PES1UG23EC115.pdf" target="_blank" rel="noopener">View Report PDF ↗</a>)</li>
+            <li><strong>BSERC Systems Engineering Intern:</strong> Evaluated design change requirements using MATLAB/XFLR5 and prepared cross-functional data reports.</li>
+            <li><strong>Product Lifecycle &amp; Release Management:</strong> Managed end-to-end release lifecycle and version tracking for a published Play Store application.</li>
+            <li><strong>Quality Inspection &amp; Process Control:</strong> Built 4-tier defect severity matrices to support quality assurance and Process of Record (POR) compliance.</li>
+          </ul>
+
+          <div class="role-section-label">Core Skills</div>
           <div class="role-competencies">
             <span class="proj-tag">ECN / MCN / PCN</span>
             <span class="proj-tag">Config &amp; Order BOM</span>
@@ -774,6 +830,7 @@
             <span class="proj-tag">Process of Record (POR)</span>
             <span class="proj-tag">E&amp;O Inventory</span>
             <span class="proj-tag">Power BI &amp; Excel</span>
+            <span class="proj-tag">Cross-Functional Coordination</span>
           </div>
           <div class="role-card-actions">
             <a class="btn btn-filled btn-sm" href="resume_hardik_gupta_non_tech.pdf" download>Download Non-Tech Resume ↓</a>
@@ -867,7 +924,11 @@
             <div class="entry-title">Summer Intern</div>
             <div class="entry-date">Jul 2025 – Aug 2025</div>
           </div>
-          <div class="entry-org"><a href="https://drive.google.com/file/d/1Mf-7_FswIQ63ktg1YYJ4ocsdPASJ80v9/view?usp=sharing" target="_blank" rel="noopener">ColorHome Lighting, Noida ↗</a></div>
+          <div class="entry-org">
+            <a href="https://drive.google.com/file/d/1Mf-7_FswIQ63ktg1YYJ4ocsdPASJ80v9/view?usp=sharing" target="_blank" rel="noopener">ColorHome Lighting, Noida ↗</a>
+            &nbsp;·&nbsp;
+            <a href="PES1UG23EC115.pdf" target="_blank" rel="noopener">Internship Report PDF ↗</a>
+          </div>
           <ul class="entry-bullets">
             <li>Analyzed the end-to-end manufacturing lifecycle of 9W LED bulbs, from component sourcing to final dispatch.</li>
             <li>Gained hands-on experience in SMT operations, quality assurance, and electrical safety testing.</li>
