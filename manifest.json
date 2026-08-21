@@ -1,0 +1,16 @@
+{
+  "name": "Hardik Gupta | Portfolio",
+  "short_name": "Hardik Portfolio",
+  "description": "Portfolio of Hardik Gupta - ECE Undergraduate specializing in Native Android, AI/ML, Computer Vision, and Product/Operations.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#111110",
+  "theme_color": "#111110",
+  "icons": [
+    {
+      "src": "https://hg-8.github.io/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ]
+}

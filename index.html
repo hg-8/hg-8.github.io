@@ -1,14 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#111110" id="meta-theme-color" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>Hardik Gupta | Portfolio</title>
+  <link rel="manifest" href="manifest.json" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400&display=swap"
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@300;400;500&display=swap"
     rel="stylesheet" />
   <style>
     *,
@@ -23,92 +27,139 @@
     [data-theme="light"] {
       --bg: #fafaf9;
       --bg-sec: #f3f2ef;
+      --glass-bg: rgba(250, 250, 249, 0.85);
+      --dock-bg: rgba(243, 242, 239, 0.88);
       --text: #1a1a18;
-      --text-sec: #6b6b68;
-      --text-ter: #a8a8a4;
-      --border: rgba(26, 26, 24, 0.12);
-      --border-sec: rgba(26, 26, 24, 0.22);
+      --text-sec: #585854;
+      --text-ter: #8c8c87;
+      --border: rgba(26, 26, 24, 0.10);
+      --border-sec: rgba(26, 26, 24, 0.20);
       --accent: #1a1a18;
+      --accent-rgb: 26, 26, 24;
+      --card-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+      --dock-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.12);
     }
 
     [data-theme="dark"] {
       --bg: #111110;
       --bg-sec: #1c1c1a;
+      --glass-bg: rgba(17, 17, 16, 0.85);
+      --dock-bg: rgba(28, 28, 26, 0.88);
       --text: #f0ede8;
-      --text-sec: #8a8a86;
-      --text-ter: #55554f;
+      --text-sec: #9e9e98;
+      --text-ter: #63635d;
       --border: rgba(240, 237, 232, 0.10);
       --border-sec: rgba(240, 237, 232, 0.20);
       --accent: #f0ede8;
+      --accent-rgb: 240, 237, 232;
+      --card-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3);
+      --dock-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
     }
 
     @media (prefers-color-scheme: dark) {
       :root:not([data-theme="light"]) {
         --bg: #111110;
         --bg-sec: #1c1c1a;
+        --glass-bg: rgba(17, 17, 16, 0.85);
+        --dock-bg: rgba(28, 28, 26, 0.88);
         --text: #f0ede8;
-        --text-sec: #8a8a86;
-        --text-ter: #55554f;
+        --text-sec: #9e9e98;
+        --text-ter: #63635d;
         --border: rgba(240, 237, 232, 0.10);
         --border-sec: rgba(240, 237, 232, 0.20);
         --accent: #f0ede8;
+        --accent-rgb: 240, 237, 232;
+        --card-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3);
+        --dock-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
       }
     }
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: 70px;
     }
 
     body {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background: var(--bg);
       color: var(--text);
       -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+      padding-bottom: max(5rem, calc(4rem + env(safe-area-inset-bottom)));
+      line-height: 1.5;
     }
 
+    /* Container */
     .container {
-      max-width: 720px;
+      max-width: 760px;
       margin: 0 auto;
-      padding: 0 2rem;
+      padding: 0 1.5rem;
     }
 
-    /* NAV */
+    /* Interactive Tap Feedback */
+    a, button, .btn, .role-tab, .proj-card, .contact-link, .bottom-dock-item {
+      transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), background 0.15s, border-color 0.15s, color 0.15s, opacity 0.15s;
+    }
+
+    a:active, button:active, .btn:active, .role-tab:active, .contact-link:active, .bottom-dock-item:active {
+      transform: scale(0.96);
+    }
+
+    /* NAV HEADER */
     nav {
       position: sticky;
       top: 0;
-      background: var(--bg);
-      z-index: 100;
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 1000;
       border-bottom: 0.5px solid var(--border);
       width: 100%;
+      padding-top: env(safe-area-inset-top);
     }
 
     .nav-container {
       max-width: 100%;
-      padding: 0 2rem;
+      padding: 0 1.5rem;
     }
 
     .nav-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0.9rem 0;
+      height: 60px;
       gap: 1rem;
     }
 
     .nav-name {
-      font-size: 15px;
-      font-weight: 500;
+      font-size: 16px;
+      font-weight: 600;
       letter-spacing: -0.01em;
       text-decoration: none;
       color: var(--text);
       white-space: nowrap;
-      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--border-sec);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
     }
 
     .nav-right {
       display: flex;
       align-items: center;
-      gap: 1.25rem;
+      gap: 1rem;
     }
 
     .nav-links {
@@ -119,38 +170,213 @@
     }
 
     .nav-links a {
-      font-size: 13px;
+      font-size: 13.5px;
       color: var(--text-sec);
       text-decoration: none;
-      transition: color 0.15s;
+      font-weight: 400;
       white-space: nowrap;
     }
 
     .nav-links a:hover,
     .nav-links a.active {
       color: var(--text);
+      font-weight: 500;
     }
 
-    /* THEME TOGGLE */
-    .theme-toggle-btn {
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      padding: 5px 12px;
+    /* NAV BUTTONS */
+    .icon-btn {
+      min-width: 40px;
+      height: 40px;
+      padding: 0 10px;
       border-radius: 100px;
       border: 0.5px solid var(--border-sec);
       background: transparent;
-      color: var(--text-sec);
+      color: var(--text);
       cursor: pointer;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 6px;
-      transition: background 0.15s, color 0.15s, border-color 0.15s;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
     }
 
-    .theme-toggle-btn:hover {
+    .icon-btn:hover {
+      background: var(--bg-sec);
+      border-color: var(--accent);
+    }
+
+    .drawer-toggle-btn {
+      display: none;
+    }
+
+    /* MOBILE DRAWER OVERLAY */
+    .drawer-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .drawer-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .drawer-content {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 290px;
+      max-width: 85vw;
+      background: var(--bg);
+      z-index: 2001;
+      transform: translateX(100%);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      padding: max(1.25rem, env(safe-area-inset-top)) 1.5rem max(1.5rem, env(safe-area-inset-bottom));
+      box-shadow: -10px 0 30px rgba(0,0,0,0.3);
+    }
+
+    .drawer-overlay.open .drawer-content {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 1rem;
+      border-bottom: 0.5px solid var(--border);
+      margin-bottom: 1rem;
+    }
+
+    .drawer-title {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .drawer-close {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 0.5px solid var(--border-sec);
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .drawer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .drawer-links a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      color: var(--text-sec);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 400;
+
+    }
+
+    .drawer-links a:hover,
+    .drawer-links a.active {
       background: var(--bg-sec);
       color: var(--text);
-      border-color: var(--accent);
+      font-weight: 500;
+    }
+
+    .drawer-links svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+    }
+
+    .drawer-footer {
+      padding-top: 1rem;
+      border-top: 0.5px solid var(--border);
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* FLOATING BOTTOM GLASS DOCK FOR MOBILE */
+    .bottom-dock {
+      position: fixed;
+      bottom: max(12px, env(safe-area-inset-bottom));
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1200;
+      width: calc(100% - 24px);
+      max-width: 440px;
+      background: var(--dock-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 0.5px solid var(--border-sec);
+      border-radius: 24px;
+      padding: 6px 8px;
+      display: none;
+      justify-content: space-around;
+      align-items: center;
+      box-shadow: var(--dock-shadow);
+    }
+
+    .bottom-dock-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      padding: 6px 10px;
+      border-radius: 16px;
+      color: var(--text-ter);
+      text-decoration: none;
+      font-size: 10.5px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      flex: 1;
+      text-align: center;
+      min-height: 44px;
+    }
+
+    .bottom-dock-item svg {
+      width: 19px;
+      height: 19px;
+      stroke-width: 2;
+      transition: transform 0.15s ease;
+    }
+
+    .bottom-dock-item:hover,
+    .bottom-dock-item.active {
+      color: var(--text);
+      background: rgba(var(--accent-rgb), 0.08);
+    }
+
+    .bottom-dock-item.active svg {
+      transform: translateY(-1px);
     }
 
     /* SECTIONS */
@@ -185,35 +411,42 @@
       color: var(--text-sec);
       letter-spacing: 0.05em;
       margin-bottom: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 100px;
+      background: var(--bg-sec);
+      border: 0.5px solid var(--border);
     }
 
     .hero h1 {
-      font-size: clamp(28px, 5vw, 40px);
-      font-weight: 300;
+      font-size: clamp(32px, 6vw, 44px);
+      font-weight: 400;
       letter-spacing: -0.03em;
       line-height: 1.1;
       margin-bottom: 0.85rem;
     }
 
     .hero-sub {
-      font-size: 14px;
+      font-size: 15px;
       color: var(--text-sec);
       line-height: 1.65;
-      max-width: 540px;
+      max-width: 580px;
       margin-bottom: 2rem;
     }
 
     .hero-actions {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
     }
 
     .btn {
       font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 400;
-      padding: 9px 20px;
+      font-size: 13.5px;
+      font-weight: 500;
+      padding: 10px 20px;
       border-radius: 100px;
       cursor: pointer;
       border: 0.5px solid var(--border-sec);
@@ -222,8 +455,10 @@
       text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      transition: background 0.15s, opacity 0.15s;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      white-space: nowrap;
     }
 
     .btn:hover {
@@ -237,7 +472,7 @@
     }
 
     .btn-filled:hover {
-      opacity: 0.82;
+      opacity: 0.88;
       background: var(--accent);
     }
 
@@ -245,12 +480,12 @@
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 2.5rem;
+      gap: 2rem;
       margin-top: 1.5rem;
     }
 
     .about-text {
-      font-size: 14px;
+      font-size: 14.5px;
       color: var(--text-sec);
       line-height: 1.8;
     }
@@ -259,32 +494,33 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-top: 0.5rem;
     }
 
     .tag {
       font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      padding: 4px 11px;
+      font-size: 11.5px;
+      padding: 5px 12px;
       border-radius: 100px;
       border: 0.5px solid var(--border-sec);
       color: var(--text-sec);
+      background: var(--bg);
     }
 
     /* PROJECTS */
     .project-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 14px;
+      gap: 16px;
     }
 
     .proj-card {
       border: 0.5px solid var(--border);
-      border-radius: 12px;
-      padding: 1.25rem;
-      transition: border-color 0.15s;
+      border-radius: 16px;
+      padding: 1.35rem;
+      background: var(--bg);
       display: flex;
       flex-direction: column;
+      box-shadow: var(--card-shadow);
     }
 
     .proj-card:hover {
@@ -296,11 +532,12 @@
       align-items: center;
       justify-content: space-between;
       margin-bottom: 6px;
+      gap: 10px;
     }
 
     .proj-title {
-      font-size: 14px;
-      font-weight: 500;
+      font-size: 15px;
+      font-weight: 600;
     }
 
     .proj-links {
@@ -312,25 +549,29 @@
 
     .proj-link {
       font-family: 'DM Mono', monospace;
-      font-size: 11px;
+      font-size: 11.5px;
       color: var(--text-ter);
       text-decoration: none;
-      transition: color 0.15s;
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: 0.5px solid var(--border);
+      background: var(--bg-sec);
     }
 
     .proj-link:hover {
       color: var(--text);
+      border-color: var(--border-sec);
     }
 
     .proj-date {
       font-family: 'DM Mono', monospace;
       font-size: 11px;
       color: var(--text-ter);
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .proj-desc {
-      font-size: 13px;
+      font-size: 13.5px;
       color: var(--text-sec);
       line-height: 1.65;
       margin-bottom: 14px;
@@ -345,14 +586,15 @@
 
     .proj-tag {
       font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      padding: 3px 8px;
-      border-radius: 4px;
+      font-size: 10.5px;
+      padding: 3px 9px;
+      border-radius: 6px;
       background: var(--bg-sec);
       color: var(--text-sec);
+      border: 0.5px solid var(--border);
     }
 
-    /* RESUME */
+    /* RESUME & ENTRY */
     .resume-block {
       margin-bottom: 2.5rem;
     }
@@ -362,7 +604,7 @@
     }
 
     .resume-entry {
-      padding: 1.1rem 0;
+      padding: 1.25rem 0;
       border-bottom: 0.5px solid var(--border);
     }
 
@@ -379,8 +621,8 @@
     }
 
     .entry-title {
-      font-size: 14px;
-      font-weight: 500;
+      font-size: 15px;
+      font-weight: 600;
     }
 
     .entry-title a {
@@ -395,16 +637,16 @@
 
     .entry-date {
       font-family: 'DM Mono', monospace;
-      font-size: 11px;
+      font-size: 11.5px;
       color: var(--text-ter);
       white-space: nowrap;
       flex-shrink: 0;
     }
 
     .entry-org {
-      font-size: 13px;
+      font-size: 13.5px;
       color: var(--text-sec);
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .entry-org a {
@@ -423,12 +665,12 @@
     }
 
     .entry-bullets li {
-      font-size: 13px;
+      font-size: 13.5px;
       color: var(--text-sec);
       line-height: 1.75;
-      padding-left: 1.1rem;
+      padding-left: 1.2rem;
       position: relative;
-      margin-bottom: 3px;
+      margin-bottom: 4px;
     }
 
     .entry-bullets li::before {
@@ -442,20 +684,23 @@
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
+      gap: 14px;
     }
 
     .skill-group {
-      padding: 1rem;
+      padding: 1.15rem;
       border: 0.5px solid var(--border);
-      border-radius: 8px;
+      border-radius: 14px;
+      background: var(--bg);
     }
 
     .skill-group-label {
       font-family: 'DM Mono', monospace;
-      font-size: 11px;
+      font-size: 11.5px;
       color: var(--text-ter);
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     .skill-items {
@@ -466,11 +711,11 @@
 
     /* CONTACT */
     .contact-intro {
-      font-size: 14px;
+      font-size: 15px;
       color: var(--text-sec);
       line-height: 1.8;
       margin-bottom: 1.75rem;
-      max-width: 460px;
+      max-width: 500px;
     }
 
     .contact-links {
@@ -480,30 +725,34 @@
     }
 
     .contact-link {
-      font-size: 13px;
-      padding: 9px 18px;
+      font-size: 13.5px;
+      padding: 10px 20px;
       border: 0.5px solid var(--border-sec);
       border-radius: 100px;
       color: var(--text-sec);
       text-decoration: none;
-      transition: border-color 0.15s, color 0.15s;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .contact-link:hover {
       border-color: var(--accent);
       color: var(--text);
+      background: var(--bg-sec);
     }
 
     /* FOOTER */
     footer {
       border-top: 0.5px solid var(--border);
-      padding: 1.5rem 0;
+      padding: 2rem 0;
       text-align: center;
     }
 
     footer p {
       font-family: 'DM Mono', monospace;
-      font-size: 11px;
+      font-size: 12px;
       color: var(--text-ter);
     }
 
@@ -512,18 +761,22 @@
       display: flex;
       gap: 8px;
       margin-bottom: 1.5rem;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      -webkit-overflow-scrolling: touch;
     }
 
     .role-tab {
       font-family: 'DM Mono', monospace;
       font-size: 12px;
-      padding: 6px 14px;
+      padding: 8px 16px;
       border-radius: 100px;
       border: 0.5px solid var(--border-sec);
       background: transparent;
       color: var(--text-sec);
       cursor: pointer;
-      transition: all 0.15s ease;
+      white-space: nowrap;
+      min-height: 38px;
     }
 
     .role-tab:hover,
@@ -541,12 +794,12 @@
 
     .role-card {
       border: 0.5px solid var(--border);
-      border-radius: 12px;
-      padding: 1.35rem;
+      border-radius: 16px;
+      padding: 1.5rem;
       background: var(--bg);
-      transition: border-color 0.2s ease;
       display: flex;
       flex-direction: column;
+      box-shadow: var(--card-shadow);
     }
 
     .role-card:hover {
@@ -557,7 +810,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
+      gap: 8px;
     }
 
     .role-badge {
@@ -576,12 +830,10 @@
       border: 0.5px solid rgba(37, 99, 235, 0.3);
     }
 
-    @media (prefers-color-scheme: dark) {
-      .badge-tech {
-        background: rgba(96, 165, 250, 0.15);
-        color: #60a5fa;
-        border-color: rgba(96, 165, 250, 0.3);
-      }
+    [data-theme="dark"] .badge-tech {
+      background: rgba(96, 165, 250, 0.15);
+      color: #60a5fa;
+      border-color: rgba(96, 165, 250, 0.3);
     }
 
     .badge-nontech {
@@ -590,30 +842,28 @@
       border: 0.5px solid rgba(16, 185, 129, 0.3);
     }
 
-    @media (prefers-color-scheme: dark) {
-      .badge-nontech {
-        background: rgba(52, 211, 153, 0.15);
-        color: #34d399;
-        border-color: rgba(52, 211, 153, 0.3);
-      }
+    [data-theme="dark"] .badge-nontech {
+      background: rgba(52, 211, 153, 0.15);
+      color: #34d399;
+      border-color: rgba(52, 211, 153, 0.3);
     }
 
     .role-title {
-      font-size: 15px;
-      font-weight: 500;
+      font-size: 16px;
+      font-weight: 600;
       letter-spacing: -0.01em;
       margin-bottom: 4px;
     }
 
     .role-subtitle {
       font-family: 'DM Mono', monospace;
-      font-size: 11px;
+      font-size: 11.5px;
       color: var(--text-ter);
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     .role-desc {
-      font-size: 13px;
+      font-size: 13.5px;
       color: var(--text-sec);
       line-height: 1.65;
       margin-bottom: 14px;
@@ -633,7 +883,7 @@
       letter-spacing: 0.05em;
       color: var(--text-ter);
       text-transform: uppercase;
-      margin: 14px 0 6px;
+      margin: 14px 0 8px;
     }
 
     .role-bullets {
@@ -643,7 +893,7 @@
     }
 
     .role-bullets li {
-      font-size: 12.5px;
+      font-size: 13px;
       color: var(--text-sec);
       line-height: 1.65;
       padding-left: 1.1rem;
@@ -663,17 +913,139 @@
       gap: 8px;
       flex-wrap: wrap;
       margin-top: auto;
-      padding-top: 10px;
+      padding-top: 12px;
       border-top: 0.5px solid var(--border);
     }
 
     .btn-sm {
-      font-size: 12px;
-      padding: 6px 14px;
+      font-size: 12.5px;
+      padding: 8px 16px;
+      min-height: 38px;
     }
 
-    /* RESPONSIVE */
-    @media (max-width: 560px) {
+    /* PDF PREVIEW MODAL FOR MOBILE & DESKTOP */
+    .pdf-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 3000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: max(1rem, env(safe-area-inset-top)) 1rem max(1rem, env(safe-area-inset-bottom));
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .pdf-modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .pdf-modal-card {
+      width: 100%;
+      max-width: 860px;
+      height: 88vh;
+      background: var(--bg);
+      border-radius: 20px;
+      border: 0.5px solid var(--border-sec);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+
+    .pdf-modal-header {
+      padding: 12px 18px;
+      border-bottom: 0.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-sec);
+    }
+
+    .pdf-modal-title {
+      font-size: 14.5px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-right: 12px;
+    }
+
+    .pdf-modal-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .pdf-modal-body {
+      flex: 1;
+      width: 100%;
+      background: #525659;
+      position: relative;
+    }
+
+    .pdf-modal-body iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* TOAST NOTIFICATION */
+    .toast {
+      position: fixed;
+      bottom: max(80px, calc(70px + env(safe-area-inset-bottom)));
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--accent);
+      color: var(--bg);
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      padding: 8px 18px;
+      border-radius: 100px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      z-index: 4000;
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* RESPONSIVE DESIGN FOR TABLETS AND MOBILE */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .drawer-toggle-btn {
+        display: inline-flex;
+      }
+
+      .bottom-dock {
+        display: flex;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .hero-sub {
+        font-size: 14px;
+      }
+
       .about-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
@@ -691,8 +1063,13 @@
         grid-template-columns: 1fr;
       }
 
-      .nav-links {
-        gap: 1rem;
+      .entry-header {
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .container {
+        padding: 0 1.25rem;
       }
     }
   </style>
@@ -700,14 +1077,19 @@
 
 <body>
 
+  <!-- TOP STICKY NAV -->
   <nav>
     <div class="nav-container">
       <div class="nav-inner">
-        <a class="nav-name" href="#about">Hardik Gupta</a>
+        <a class="nav-name" href="#about">
+          <span class="nav-avatar">HG</span>
+          Hardik Gupta
+        </a>
         <div class="nav-right">
+          <!-- Desktop Nav Links -->
           <ul class="nav-links">
             <li><a href="#about">About</a></li>
-            <li><a href="#roles">Roles &amp; Resumes</a></li>
+            <li><a href="#roles">Roles</a></li>
             <li><a href="#education">Education</a></li>
             <li><a href="#certification">Certification</a></li>
             <li><a href="#experience">Experience</a></li>
@@ -715,27 +1097,132 @@
             <li><a href="#extracurriculars">Extracurriculars</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
-          <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+
+          <!-- Theme Toggle Button -->
+          <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
             <span>Theme</span>
+          </button>
+
+          <!-- Mobile Drawer Toggle Button -->
+          <button id="drawer-toggle" class="icon-btn drawer-toggle-btn" onclick="toggleDrawer()" aria-label="Open Navigation Menu">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
           </button>
         </div>
       </div>
     </div>
   </nav>
 
+  <!-- MOBILE SLIDE-OUT DRAWER OVERLAY -->
+  <div id="drawer-overlay" class="drawer-overlay" onclick="closeDrawer(event)">
+    <div class="drawer-content" onclick="event.stopPropagation()">
+      <div class="drawer-header">
+        <div class="drawer-title">Navigation</div>
+        <button class="drawer-close" onclick="closeDrawer()" aria-label="Close menu">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <ul class="drawer-links">
+        <li>
+          <a href="#about" onclick="closeDrawer()">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            About Me
+          </a>
+        </li>
+        <li>
+          <a href="#roles" onclick="closeDrawer()">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            Roles &amp; Resumes
+          </a>
+        </li>
+        <li>
+          <a href="#education" onclick="closeDrawer()">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            Education
+          </a>
+        </li>
+        <li>
+          <a href="#certification" onclick="closeDrawer()">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+            Certifications
+          </a>
+        </li>
+        <li>
+          <a href="#experience" onclick="closeDrawer()">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Experience
+          </a>
+        </li>
+        <li>
+          <a href="#projects" onclick="closeDrawer()">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            Projects
+          </a>
+        </li>
+        <li>
+          <a href="#extracurriculars" onclick="closeDrawer()">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Extracurriculars
+          </a>
+        </li>
+        <li>
+          <a href="#contact" onclick="closeDrawer()">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Contact
+          </a>
+        </li>
+      </ul>
+      <div class="drawer-footer">
+        <button class="btn btn-filled" onclick="sharePortfolio(); closeDrawer();">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          Share Portfolio
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING BOTTOM GLASS NAVIGATION DOCK (MOBILE ONLY) -->
+  <div class="bottom-dock">
+    <a href="#about" class="bottom-dock-item active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>About</span>
+    </a>
+    <a href="#roles" class="bottom-dock-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+      <span>Roles</span>
+    </a>
+    <a href="#projects" class="bottom-dock-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>Projects</span>
+    </a>
+    <a href="#experience" class="bottom-dock-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      <span>Work</span>
+    </a>
+    <a href="#contact" class="bottom-dock-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <span>Contact</span>
+    </a>
+  </div>
+
   <div class="container">
 
-    <!-- ABOUT -->
+    <!-- HERO / ABOUT -->
     <section id="about">
       <div class="hero">
-        <div class="hero-tag">B.Tech | ECE Undergraduate</div>
+        <div class="hero-tag">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          B.Tech | ECE Undergraduate
+        </div>
         <h1>Hardik Gupta</h1>
         <p class="hero-sub">Electronic &amp; Communication Engineering · Software, AI/ML &amp; Product/Operations</p>
         <div class="hero-actions">
           <a class="btn btn-filled" href="#projects">View Projects</a>
-          <a class="btn" href="resume_hardik_gupta_general_technical.pdf" download>Tech Resume ↓</a>
-          <a class="btn" href="resume_hardik_gupta_non_tech.pdf" download>Non-Tech Resume ↓</a>
+          <button class="btn" onclick="openPdfModal('resume_hardik_gupta_general_technical.pdf', 'Tech Resume')">Tech Resume ↗</button>
+          <button class="btn" onclick="openPdfModal('resume_hardik_gupta_non_tech.pdf', 'Non-Tech Resume')">Non-Tech Resume ↗</button>
+          <button class="btn" onclick="sharePortfolio()" title="Share Portfolio">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          </button>
         </div>
       </div>
 
@@ -745,7 +1232,7 @@
         <div>
           <div class="tags-wrap">
             <span class="tag">Native Android</span>
-            <span class="tag">Kotlin &amp; Jetpack Compose</span>
+            <span class="tag">Kotlin &amp; Compose</span>
             <span class="tag">Computer Vision</span>
             <span class="tag">Deep Learning</span>
             <span class="tag">Product Change Analyst</span>
@@ -798,8 +1285,8 @@
             <span class="proj-tag">MATLAB &amp; C</span>
           </div>
           <div class="role-card-actions">
-            <a class="btn btn-filled btn-sm" href="resume_hardik_gupta_general_technical.pdf" download>Download Tech Resume ↓</a>
-            <a class="btn btn-sm" href="resume_hardik_gupta_general_technical.pdf" target="_blank" rel="noopener">Preview ↗</a>
+            <a class="btn btn-filled btn-sm" href="resume_hardik_gupta_general_technical.pdf" download>Download PDF ↓</a>
+            <button class="btn btn-sm" onclick="openPdfModal('resume_hardik_gupta_general_technical.pdf', 'Tech Resume')">Preview ↗</button>
           </div>
         </div>
 
@@ -817,7 +1304,7 @@
           
           <div class="role-section-label">Highlights &amp; Key Work</div>
           <ul class="role-bullets">
-            <li><strong>ColorHome Lighting (Operations Intern):</strong> Audited 9W LED bulb manufacturing, managed ECN/MCN workflows, verified BOM structures, and authored complete internship report. (<a href="PES1UG23EC115.pdf" target="_blank" rel="noopener">View Report PDF ↗</a>)</li>
+            <li><strong>ColorHome Lighting (Operations Intern):</strong> Audited 9W LED bulb manufacturing, managed ECN/MCN workflows, verified BOM structures, and authored complete internship report. (<a href="javascript:void(0)" onclick="openPdfModal('PES1UG23EC115.pdf', 'ColorHome Internship Report')">View Report PDF ↗</a>)</li>
             <li><strong>BSERC Systems Engineering Intern:</strong> Evaluated design change requirements using MATLAB/XFLR5 and prepared cross-functional data reports.</li>
             <li><strong>Product Lifecycle &amp; Release Management:</strong> Managed end-to-end release lifecycle and version tracking for a published Play Store application.</li>
             <li><strong>Quality Inspection &amp; Process Control:</strong> Built 4-tier defect severity matrices to support quality assurance and Process of Record (POR) compliance.</li>
@@ -834,8 +1321,8 @@
             <span class="proj-tag">Cross-Functional Coordination</span>
           </div>
           <div class="role-card-actions">
-            <a class="btn btn-filled btn-sm" href="resume_hardik_gupta_non_tech.pdf" download>Download Non-Tech Resume ↓</a>
-            <a class="btn btn-sm" href="resume_hardik_gupta_non_tech.pdf" target="_blank" rel="noopener">Preview ↗</a>
+            <a class="btn btn-filled btn-sm" href="resume_hardik_gupta_non_tech.pdf" download>Download PDF ↓</a>
+            <button class="btn btn-sm" onclick="openPdfModal('resume_hardik_gupta_non_tech.pdf', 'Non-Tech Resume')">Preview ↗</button>
           </div>
         </div>
 
@@ -897,7 +1384,7 @@
         <div class="resume-entry">
           <div class="entry-header">
             <div class="entry-title"><a href="https://drive.google.com/file/d/1jk_1aRjOpH2qz1br1GZUqjmhKZvuYqA2/view?usp=sharing" target="_blank" rel="noopener">Microsoft Office Specialist: Excel 2013 — Microsoft ↗</a></div>
-            <div class="entry-date"></div>
+            <div class="entry-date">Certified</div>
           </div>
           <ul class="entry-bullets" style="margin-top:8px;">
             <li>Certified in spreadsheet data management, complex formulas, pivot tables, and data modeling in MS Excel.</li>
@@ -931,8 +1418,8 @@
             <li>Gained hands-on experience in SMT operations, quality assurance, and electrical safety testing.</li>
             <li>Authored complete technical internship report detailing manufacturing operations and quality inspection.</li>
           </ul>
-          <div style="margin-top: 10px;">
-            <a class="btn btn-sm btn-filled" href="PES1UG23EC115.pdf" target="_blank" rel="noopener">View Internship Report (PDF) ↗</a>
+          <div style="margin-top: 12px;">
+            <button class="btn btn-sm btn-filled" onclick="openPdfModal('PES1UG23EC115.pdf', 'ColorHome Internship Report')">View Internship Report (PDF) ↗</button>
           </div>
         </div>
       </div>
@@ -1014,9 +1501,9 @@
 
         <div class="proj-card">
           <div class="proj-header">
-            <div class="proj-title">LED Manufacturing &amp; Quality Analysis Report</div>
+            <div class="proj-title">LED Manufacturing &amp; Quality Report</div>
             <div class="proj-links">
-              <a href="PES1UG23EC115.pdf" target="_blank" rel="noopener" class="proj-link">PDF Report ↗</a>
+              <button class="proj-link" onclick="openPdfModal('PES1UG23EC115.pdf', 'ColorHome Internship Report')">PDF Report ↗</button>
             </div>
           </div>
           <div class="proj-date">Aug 2025</div>
@@ -1026,7 +1513,6 @@
             <span class="proj-tag">Quality Control</span>
             <span class="proj-tag">SMT Line</span>
             <span class="proj-tag">Config BOM</span>
-            <span class="proj-tag">Report PDF</span>
           </div>
         </div>
 
@@ -1098,10 +1584,22 @@
       <div class="sec-label">Contact</div>
       <p class="contact-intro">Open to research collaborations, software engineering internships, and Android / ML roles. Feel free to reach out.</p>
       <div class="contact-links">
-        <a class="contact-link" href="mailto:hg08072005@gmail.com">Email</a>
-        <a class="contact-link" href="tel:+919717417305">+91 9717417305</a>
-        <a class="contact-link" href="https://github.com/hg-8" target="_blank" rel="noopener">GitHub</a>
-        <a class="contact-link" href="https://www.linkedin.com/in/hardik-gupta-b767b325a" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="contact-link" href="mailto:hg08072005@gmail.com">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Email
+        </a>
+        <a class="contact-link" href="tel:+919717417305">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +91 9717417305
+        </a>
+        <a class="contact-link" href="https://github.com/hg-8" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          GitHub
+        </a>
+        <a class="contact-link" href="https://www.linkedin.com/in/hardik-gupta-b767b325a" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
       </div>
     </section>
 
@@ -1109,26 +1607,64 @@
 
   <footer>
     <div class="container">
-      <p>© 2026 Hardik Gupta</p>
+      <p>© 2026 Hardik Gupta · Crafted for Mobile &amp; Web</p>
     </div>
   </footer>
 
+  <!-- PDF PREVIEW MODAL -->
+  <div id="pdf-modal" class="pdf-modal-overlay" onclick="closePdfModal(event)">
+    <div class="pdf-modal-card" onclick="event.stopPropagation()">
+      <div class="pdf-modal-header">
+        <div id="pdf-modal-title" class="pdf-modal-title">Document Preview</div>
+        <div class="pdf-modal-actions">
+          <a id="pdf-modal-download" class="btn btn-filled btn-sm" href="#" download>Download ↓</a>
+          <button class="drawer-close" onclick="closePdfModal()" aria-label="Close preview">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="pdf-modal-body">
+        <iframe id="pdf-modal-iframe" src="" title="PDF Preview"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="toast">Link copied to clipboard!</div>
+
   <script>
+    // INTERSECTION OBSERVER FOR ACTIVE NAV TRACKING (DESKTOP & MOBILE DOCK)
     const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-links a');
+    const navLinks = document.querySelectorAll('.nav-links a, .drawer-links a');
+    const dockLinks = document.querySelectorAll('.bottom-dock-item');
 
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          navLinks.forEach(a => a.classList.remove('active'));
-          const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
-          if (active) active.classList.add('active');
+          const id = entry.target.id;
+          
+          navLinks.forEach(a => {
+            if (a.getAttribute('href') === `#${id}`) {
+              a.classList.add('active');
+            } else {
+              a.classList.remove('active');
+            }
+          });
+
+          dockLinks.forEach(a => {
+            if (a.getAttribute('href') === `#${id}`) {
+              a.classList.add('active');
+            } else {
+              a.classList.remove('active');
+            }
+          });
         }
       });
-    }, { rootMargin: '-40% 0px -55% 0px' });
+    }, { rootMargin: '-30% 0px -60% 0px' });
 
     sections.forEach(s => observer.observe(s));
 
+    // ROLE FILTER LOGIC
     function filterRoles(category, evt) {
       const tabs = document.querySelectorAll('.role-tab');
       const cards = document.querySelectorAll('.role-card');
@@ -1147,8 +1683,23 @@
       });
     }
 
-    // Theme Switcher Logic
+    // MOBILE DRAWER LOGIC
+    const drawerOverlay = document.getElementById('drawer-overlay');
+
+    function toggleDrawer() {
+      drawerOverlay.classList.toggle('open');
+      document.body.style.overflow = drawerOverlay.classList.contains('open') ? 'hidden' : '';
+    }
+
+    function closeDrawer(e) {
+      if (e && e.target !== drawerOverlay && !e.target.classList.contains('drawer-close') && !e.target.closest('a')) return;
+      drawerOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // THEME SWITCHER LOGIC
     const themeToggleBtn = document.getElementById('theme-toggle');
+    const metaThemeColor = document.getElementById('meta-theme-color');
 
     function getPreferredTheme() {
       const savedTheme = localStorage.getItem('theme');
@@ -1159,15 +1710,18 @@
     function applyTheme(theme) {
       document.documentElement.setAttribute('data-theme', theme);
       localStorage.setItem('theme', theme);
+      if (metaThemeColor) {
+        metaThemeColor.setAttribute('content', theme === 'dark' ? '#111110' : '#fafaf9');
+      }
       updateToggleUI(theme);
     }
 
     function updateToggleUI(theme) {
       if (!themeToggleBtn) return;
       if (theme === 'dark') {
-        themeToggleBtn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg><span>Light</span>';
+        themeToggleBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg><span>Light</span>';
       } else {
-        themeToggleBtn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><span>Dark</span>';
+        themeToggleBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><span>Dark</span>';
       }
     }
 
@@ -1181,8 +1735,55 @@
         applyTheme(nextTheme);
       });
     }
-  </script>
 
+    // PDF PREVIEW MODAL LOGIC
+    const pdfModal = document.getElementById('pdf-modal');
+    const pdfIframe = document.getElementById('pdf-modal-iframe');
+    const pdfTitle = document.getElementById('pdf-modal-title');
+    const pdfDownload = document.getElementById('pdf-modal-download');
+
+    function openPdfModal(url, title) {
+      pdfTitle.textContent = title || 'PDF Document';
+      pdfDownload.setAttribute('href', url);
+      pdfDownload.setAttribute('download', url);
+      pdfIframe.src = url;
+      pdfModal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePdfModal(e) {
+      if (e && e.target !== pdfModal) return;
+      pdfModal.classList.remove('open');
+      pdfIframe.src = '';
+      document.body.style.overflow = '';
+    }
+
+    // WEB SHARE API & TOAST LOGIC
+    function sharePortfolio() {
+      const shareData = {
+        title: 'Hardik Gupta | Portfolio',
+        text: 'Hardik Gupta - ECE Undergraduate | Native Android, AI/ML, and Product Operations',
+        url: window.location.href
+      };
+
+      if (navigator.share) {
+        navigator.share(shareData).catch(() => {});
+      } else {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+          showToast('Portfolio link copied to clipboard!');
+        });
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2600);
+    }
+  </script>
 </body>
 
 </html>
