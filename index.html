@@ -7,8 +7,11 @@
   <meta name="theme-color" content="#111110" id="meta-theme-color" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
   <title>Hardik Gupta | Portfolio</title>
-  <link rel="manifest" href="manifest.json" />
+  <link rel="manifest" href="manifest.json?v=2" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -1089,8 +1092,8 @@
           <ul class="nav-links">
             <li><a href="#about">About</a></li>
             <li><a href="#roles">Roles</a></li>
-            <li><a href="#projects">Projects</a></li>
             <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
             <li><a href="#education">Education</a></li>
             <li><a href="#certification">Certification</a></li>
             <li><a href="#extracurriculars">Extracurriculars</a></li>
@@ -1135,15 +1138,15 @@
           </a>
         </li>
         <li>
-          <a href="#projects" onclick="closeDrawer()">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-            Projects
-          </a>
-        </li>
-        <li>
           <a href="#experience" onclick="closeDrawer()">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
             Experience
+          </a>
+        </li>
+        <li>
+          <a href="#projects" onclick="closeDrawer()">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            Projects
           </a>
         </li>
         <li>
@@ -1190,13 +1193,13 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
       <span>Roles</span>
     </a>
-    <a href="#projects" class="bottom-dock-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>Projects</span>
-    </a>
     <a href="#experience" class="bottom-dock-item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
       <span>Work</span>
+    </a>
+    <a href="#projects" class="bottom-dock-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>Projects</span>
     </a>
     <a href="#contact" class="bottom-dock-item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -1328,6 +1331,38 @@
       </div>
     </section>
 
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="resume-block">
+        <div class="sec-label">Experience</div>
+        <div class="resume-entry">
+          <div class="entry-header">
+            <div class="entry-title">Winter Intern</div>
+            <div class="entry-date">Dec 2025 – Jan 2026</div>
+          </div>
+          <div class="entry-org"><a href="https://drive.google.com/file/d/1CZAogUx8Up3SciChBe_x2utdCv5V92eJ/view?usp=sharing" target="_blank" rel="noopener">Bharat Space Education Research Centre, New Delhi ↗</a></div>
+          <ul class="entry-bullets">
+            <li>Modeled aircraft stability and performance using MATLAB (AID toolbox) and XFLR5, identifying key design parameters for optimal flight behavior.</li>
+          </ul>
+        </div>
+        <div class="resume-entry">
+          <div class="entry-header">
+            <div class="entry-title">Summer Intern</div>
+            <div class="entry-date">Jul 2025 – Aug 2025</div>
+          </div>
+          <div class="entry-org"><a href="https://drive.google.com/file/d/1Mf-7_FswIQ63ktg1YYJ4ocsdPASJ80v9/view?usp=sharing" target="_blank" rel="noopener">ColorHome Lighting, Noida ↗</a></div>
+          <ul class="entry-bullets">
+            <li>Analyzed the end-to-end manufacturing lifecycle of 9W LED bulbs, from component sourcing to final dispatch.</li>
+            <li>Gained hands-on experience in SMT operations, quality assurance, and electrical safety testing.</li>
+            <li>Authored complete technical internship report detailing manufacturing operations and quality inspection.</li>
+          </ul>
+          <div style="margin-top: 12px;">
+            <button class="btn btn-sm btn-filled" onclick="openPdfModal('PES1UG23EC115.pdf', 'ColorHome Internship Report')">View Internship Report (PDF) ↗</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- PROJECTS -->
     <section id="projects">
       <div class="sec-label">Projects</div>
@@ -1419,38 +1454,6 @@
           </div>
         </div>
 
-      </div>
-    </section>
-
-    <!-- EXPERIENCE -->
-    <section id="experience">
-      <div class="resume-block">
-        <div class="sec-label">Experience</div>
-        <div class="resume-entry">
-          <div class="entry-header">
-            <div class="entry-title">Winter Intern</div>
-            <div class="entry-date">Dec 2025 – Jan 2026</div>
-          </div>
-          <div class="entry-org"><a href="https://drive.google.com/file/d/1CZAogUx8Up3SciChBe_x2utdCv5V92eJ/view?usp=sharing" target="_blank" rel="noopener">Bharat Space Education Research Centre, New Delhi ↗</a></div>
-          <ul class="entry-bullets">
-            <li>Modeled aircraft stability and performance using MATLAB (AID toolbox) and XFLR5, identifying key design parameters for optimal flight behavior.</li>
-          </ul>
-        </div>
-        <div class="resume-entry">
-          <div class="entry-header">
-            <div class="entry-title">Summer Intern</div>
-            <div class="entry-date">Jul 2025 – Aug 2025</div>
-          </div>
-          <div class="entry-org"><a href="https://drive.google.com/file/d/1Mf-7_FswIQ63ktg1YYJ4ocsdPASJ80v9/view?usp=sharing" target="_blank" rel="noopener">ColorHome Lighting, Noida ↗</a></div>
-          <ul class="entry-bullets">
-            <li>Analyzed the end-to-end manufacturing lifecycle of 9W LED bulbs, from component sourcing to final dispatch.</li>
-            <li>Gained hands-on experience in SMT operations, quality assurance, and electrical safety testing.</li>
-            <li>Authored complete technical internship report detailing manufacturing operations and quality inspection.</li>
-          </ul>
-          <div style="margin-top: 12px;">
-            <button class="btn btn-sm btn-filled" onclick="openPdfModal('PES1UG23EC115.pdf', 'ColorHome Internship Report')">View Internship Report (PDF) ↗</button>
-          </div>
-        </div>
       </div>
     </section>
 
