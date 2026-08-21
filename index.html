@@ -11,7 +11,7 @@
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
   <title>Hardik Gupta | Portfolio</title>
-  <link rel="manifest" href="manifest.json?v=3" />
+  <link rel="manifest" href="manifest.json?v=4" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -31,7 +31,7 @@
       --bg: #fafaf9;
       --bg-sec: #f3f2ef;
       --glass-bg: rgba(250, 250, 249, 0.85);
-      --dock-bg: rgba(243, 242, 239, 0.92);
+      --dock-bg: rgba(243, 242, 239, 0.94);
       --text: #1a1a18;
       --text-sec: #585854;
       --text-ter: #8c8c87;
@@ -47,7 +47,7 @@
       --bg: #111110;
       --bg-sec: #1c1c1a;
       --glass-bg: rgba(17, 17, 16, 0.85);
-      --dock-bg: rgba(28, 28, 26, 0.92);
+      --dock-bg: rgba(28, 28, 26, 0.94);
       --text: #f0ede8;
       --text-sec: #9e9e98;
       --text-ter: #63635d;
@@ -64,7 +64,7 @@
         --bg: #111110;
         --bg-sec: #1c1c1a;
         --glass-bg: rgba(17, 17, 16, 0.85);
-        --dock-bg: rgba(28, 28, 26, 0.92);
+        --dock-bg: rgba(28, 28, 26, 0.94);
         --text: #f0ede8;
         --text-sec: #9e9e98;
         --text-ter: #63635d;
@@ -325,23 +325,23 @@
       gap: 10px;
     }
 
-    /* FLOATING BOTTOM GLASS DOCK FOR MOBILE (6 ITEMS) */
+    /* FLOATING BOTTOM GLASS DOCK FOR MOBILE (7 ITEMS) */
     .bottom-dock {
       position: fixed;
-      bottom: max(10px, env(safe-area-inset-bottom));
+      bottom: max(8px, env(safe-area-inset-bottom));
       left: 50%;
       transform: translateX(-50%);
       z-index: 1200;
-      width: calc(100% - 16px);
-      max-width: 480px;
+      width: calc(100% - 12px);
+      max-width: 520px;
       background: var(--dock-bg);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 0.5px solid var(--border-sec);
       border-radius: 24px;
-      padding: 5px 4px;
+      padding: 4px 2px;
       display: none;
-      justify-content: space-around;
+      justify-style: space-around;
       align-items: center;
       box-shadow: var(--dock-shadow);
     }
@@ -352,22 +352,22 @@
       align-items: center;
       justify-content: center;
       gap: 2px;
-      padding: 5px 4px;
-      border-radius: 14px;
+      padding: 4px 2px;
+      border-radius: 12px;
       color: var(--text-ter);
       text-decoration: none;
-      font-size: 10px;
+      font-size: 9.5px;
       font-family: 'DM Sans', sans-serif;
       font-weight: 500;
       flex: 1;
       text-align: center;
-      min-height: 44px;
+      min-height: 42px;
       white-space: nowrap;
     }
 
     .bottom-dock-item svg {
-      width: 18px;
-      height: 18px;
+      width: 17px;
+      height: 17px;
       stroke-width: 2;
       transition: transform 0.15s ease;
     }
@@ -1092,6 +1092,7 @@
           <!-- Desktop Nav Links -->
           <ul class="nav-links">
             <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
             <li><a href="#roles">Roles</a></li>
             <li><a href="#experience">Experience</a></li>
             <li><a href="#projects">Projects</a></li>
@@ -1130,6 +1131,12 @@
           <a href="#about" onclick="closeDrawer()">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             About Me
+          </a>
+        </li>
+        <li>
+          <a href="#skills" onclick="closeDrawer()">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+            Skills &amp; Tools
           </a>
         </li>
         <li>
@@ -1184,11 +1191,15 @@
     </div>
   </div>
 
-  <!-- FLOATING BOTTOM GLASS NAVIGATION DOCK (6 ITEMS: About | Roles | Work | Projects | Certs | Contact) -->
+  <!-- FLOATING BOTTOM GLASS NAVIGATION DOCK (7 ITEMS: About | Skills | Roles | Work | Projects | Certs | Contact) -->
   <div class="bottom-dock">
     <a href="#about" class="bottom-dock-item active">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       <span>About</span>
+    </a>
+    <a href="#skills" class="bottom-dock-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      <span>Skills</span>
     </a>
     <a href="#roles" class="bottom-dock-item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
@@ -1245,6 +1256,53 @@
             <span class="tag">Product Change Analyst</span>
             <span class="tag">Project Management</span>
             <span class="tag">ECN / MCN / BOM</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="sec-label">Skills &amp; Competencies</div>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <div class="skill-group-label">Languages &amp; Mobile</div>
+          <div class="skill-items">
+            <span class="tag">Python</span>
+            <span class="tag">C</span>
+            <span class="tag">Kotlin</span>
+            <span class="tag">Assembly</span>
+            <span class="tag">Jetpack Compose</span>
+            <span class="tag">Room DB</span>
+            <span class="tag">Firebase</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">Machine Learning &amp; CV</div>
+          <div class="skill-items">
+            <span class="tag">Scikit-learn</span>
+            <span class="tag">TensorFlow</span>
+            <span class="tag">PyTorch</span>
+            <span class="tag">OpenCV</span>
+            <span class="tag">YOLOv5/v8</span>
+            <span class="tag">NumPy</span>
+            <span class="tag">Pandas</span>
+            <span class="tag">Matplotlib</span>
+            <span class="tag">Seaborn</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">Tools &amp; Analytics</div>
+          <div class="skill-items">
+            <span class="tag">MS Excel</span>
+            <span class="tag">Git</span>
+            <span class="tag">Jupyter</span>
+            <span class="tag">VS Code</span>
+            <span class="tag">MATLAB</span>
+            <span class="tag">Google Colab</span>
+            <span class="tag">Ripes</span>
+            <span class="tag">Arduino IDE</span>
+            <span class="tag">LaTeX</span>
           </div>
         </div>
       </div>
@@ -1324,7 +1382,8 @@
             <span class="proj-tag">Stage-Gate PM</span>
             <span class="proj-tag">Process of Record (POR)</span>
             <span class="proj-tag">E&amp;O Inventory</span>
-            <span class="proj-tag">Power BI &amp; Excel</span>
+            <span class="proj-tag">MS Excel</span>
+            <span class="proj-tag">Power BI</span>
             <span class="proj-tag">Cross-Functional Coordination</span>
           </div>
           <div class="role-card-actions">
@@ -1522,52 +1581,6 @@
             <div class="entry-date">Apr 2020 – Mar 2021</div>
           </div>
           <div class="entry-org">Class 10th — CBSE</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SKILLS -->
-    <section id="skills">
-      <div class="sec-label">Skills</div>
-      <div class="skills-grid">
-        <div class="skill-group">
-          <div class="skill-group-label">Languages &amp; Mobile</div>
-          <div class="skill-items">
-            <span class="tag">Python</span>
-            <span class="tag">C</span>
-            <span class="tag">Kotlin</span>
-            <span class="tag">Assembly</span>
-            <span class="tag">Jetpack Compose</span>
-            <span class="tag">Room DB</span>
-            <span class="tag">Firebase</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-group-label">Machine Learning &amp; CV</div>
-          <div class="skill-items">
-            <span class="tag">Scikit-learn</span>
-            <span class="tag">TensorFlow</span>
-            <span class="tag">PyTorch</span>
-            <span class="tag">OpenCV</span>
-            <span class="tag">YOLOv5/v8</span>
-            <span class="tag">NumPy</span>
-            <span class="tag">Pandas</span>
-            <span class="tag">Matplotlib</span>
-            <span class="tag">Seaborn</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-group-label">Tools &amp; Frameworks</div>
-          <div class="skill-items">
-            <span class="tag">Git</span>
-            <span class="tag">Jupyter</span>
-            <span class="tag">VS Code</span>
-            <span class="tag">MATLAB</span>
-            <span class="tag">Google Colab</span>
-            <span class="tag">Ripes</span>
-            <span class="tag">Arduino IDE</span>
-            <span class="tag">LaTeX</span>
-          </div>
         </div>
       </div>
     </section>
