@@ -11,7 +11,7 @@
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
   <title>Hardik Gupta | Portfolio</title>
-  <link rel="manifest" href="manifest.json?v=4" />
+  <link rel="manifest" href="manifest.json?v=5" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -325,23 +325,23 @@
       gap: 10px;
     }
 
-    /* FLOATING BOTTOM GLASS DOCK FOR MOBILE (7 ITEMS) */
+    /* FLOATING BOTTOM GLASS DOCK FOR MOBILE (6 CLEAN ITEMS) */
     .bottom-dock {
       position: fixed;
-      bottom: max(8px, env(safe-area-inset-bottom));
+      bottom: max(10px, env(safe-area-inset-bottom));
       left: 50%;
       transform: translateX(-50%);
       z-index: 1200;
-      width: calc(100% - 12px);
-      max-width: 520px;
+      width: calc(100% - 16px);
+      max-width: 480px;
       background: var(--dock-bg);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 0.5px solid var(--border-sec);
       border-radius: 24px;
-      padding: 4px 2px;
+      padding: 5px 4px;
       display: none;
-      justify-style: space-around;
+      justify-content: space-around;
       align-items: center;
       box-shadow: var(--dock-shadow);
     }
@@ -352,22 +352,22 @@
       align-items: center;
       justify-content: center;
       gap: 2px;
-      padding: 4px 2px;
-      border-radius: 12px;
+      padding: 5px 4px;
+      border-radius: 14px;
       color: var(--text-ter);
       text-decoration: none;
-      font-size: 9.5px;
+      font-size: 10px;
       font-family: 'DM Sans', sans-serif;
       font-weight: 500;
       flex: 1;
       text-align: center;
-      min-height: 42px;
+      min-height: 44px;
       white-space: nowrap;
     }
 
     .bottom-dock-item svg {
-      width: 17px;
-      height: 17px;
+      width: 18px;
+      height: 18px;
       stroke-width: 2;
       transition: transform 0.15s ease;
     }
@@ -1191,13 +1191,9 @@
     </div>
   </div>
 
-  <!-- FLOATING BOTTOM GLASS NAVIGATION DOCK (7 ITEMS: About | Skills | Roles | Work | Projects | Certs | Contact) -->
+  <!-- FLOATING BOTTOM GLASS NAVIGATION DOCK (6 CLEAN ITEMS: Skills | Roles | Work | Projects | Certs | Contact) -->
   <div class="bottom-dock">
-    <a href="#about" class="bottom-dock-item active">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      <span>About</span>
-    </a>
-    <a href="#skills" class="bottom-dock-item">
+    <a href="#skills" class="bottom-dock-item active">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
       <span>Skills</span>
     </a>
